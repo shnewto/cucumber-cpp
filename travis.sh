@@ -88,3 +88,9 @@ if [ -n "${XVFBPID:-}" ]; then
     kill $XVFBPID
     wait
 fi
+
+CGREEN=build/examples/FizzBuzz/FizzBuzzSteps
+if [ -f $CGREEN ]; then
+    $CGREEN >/dev/null &
+    cucumber examples/FizzBuzz
+fi

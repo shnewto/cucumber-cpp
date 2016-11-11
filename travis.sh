@@ -21,6 +21,7 @@ cmake --build build --target features
 
 GTEST=build/examples/Calc/GTestCalculatorSteps
 BOOST=build/examples/Calc/BoostCalculatorSteps
+CGREEN=build/examples/FizzBuzz/FizzBuzzSteps
 if [ -f $GTEST ]; then
     $GTEST >/dev/null &
     cucumber examples/Calc
@@ -30,4 +31,8 @@ if [ -f $BOOST ]; then
     $BOOST >/dev/null &
     cucumber examples/Calc
     wait
+fi
+if [ -f $CGREEN ]; then
+    $CGREEN >/dev/null &
+    cucumber examples/FizzBuzz
 fi

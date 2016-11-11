@@ -100,6 +100,13 @@ if(NOT CUKE_DISABLE_GTEST)
 endif()
 
 #
+# cgreen
+#
+if(NOT CUKE_DISABLE_CGREEN)
+    find_package(cgreen QUIET)
+endif()
+
+#
 # Cucumber-Cpp
 #
 

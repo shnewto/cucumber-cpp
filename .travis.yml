@@ -29,7 +29,7 @@ addons:
       - libboost-test-dev
       - google-mock
 install:
-  - git clone https://github.com/snewt/cucumber-cpp.git
+  - git clone https://github.com/cgreen-devs/cgreen.git
   - mkdir cgreen/build && pushdir cgreen/build && cmake .. && sudo make install && popd
 
 script: ./travis.sh

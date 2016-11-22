@@ -18,6 +18,10 @@ matrix:
     - os: osx
       compiler: gcc #does anyone on osx use it?
 
+before_script:
+  - git clone https://github.com/cgreen-devs/cgreen.git
+  - mkdir cgreen/build && pushd cgreen/build && cmake .. && sudo make install && popd
+
 addons:
   apt:
     packages:
@@ -28,9 +32,6 @@ addons:
       - libboost-program-options-dev
       - libboost-test-dev
       - google-mock
-install:
-  - git clone https://github.com/cgreen-devs/cgreen.git
-  - mkdir cgreen/build && pushd cgreen/build && cmake .. && sudo make install && popd
 
 script: ./travis.sh
 

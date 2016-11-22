@@ -1,4 +1,3 @@
-
 #include <cgreen/cgreen.h> // general unit testing
 #include <cucumber-cpp/autodetect.hpp>
 #include "../../utils/DriverTestRunner.hpp"
@@ -58,7 +57,7 @@ private:
     }
 };
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     CgreenDriverTest test;
     return test.run();
 }

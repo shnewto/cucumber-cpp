@@ -20,7 +20,7 @@ class CukeCgreenInterceptor;
 typedef int TextPrinter(const char *format, ...);
 
 typedef struct {
-    TextPrinter *printer;
+    TextPrinter* printer;
     int depth;
 } TextMemo;
 
@@ -40,4 +40,3 @@ private:
 } // namespace cucumber
 
 #endif // CUKE_CGREENDRIVER_HPP_
-

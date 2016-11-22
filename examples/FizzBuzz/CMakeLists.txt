@@ -2,7 +2,7 @@ project(FizzBuzz)
 
 include_directories(${CUKE_INCLUDE_DIRS} src)
 
-add_library(FizzBuzz src/fizz_buzz)
+add_library(FizzBuzz src/FizzBuzzReporter)
 
 if(cgreen_FOUND)
     include_directories( ${CGREEN_INCLUDE_DIRS} )
@@ -12,4 +12,3 @@ if(cgreen_FOUND)
 else()
     message( "cgeen package required for this example" )
 endif()
-

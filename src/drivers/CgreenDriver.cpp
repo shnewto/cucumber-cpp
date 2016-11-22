@@ -17,8 +17,7 @@ bool CgreenStep::initialized = false;
 
 boost::function< void() > currentTestBody;
 
-static const char * const blacklist[] =
-{
+static const char* const blacklist[] = {
         "Running",
         "Completed",
         "Failure",
@@ -89,8 +88,7 @@ int CukeCgreenInterceptor::cgreenPrinter(const char* format, ...) {
 
     vsprintf(buffer, format, argPtr);
 
-    if(not is_blacklisted(buffer))
-    {
+    if(not is_blacklisted(buffer)) {
         cgreenOutput += "\n\n";
         cgreenOutput += buffer;
         cgreenOutput += "\n\n";
@@ -120,9 +118,9 @@ bool CukeCgreenInterceptor::is_blacklisted(const char* input) {
 }
 
 void CgreenStep::setReporterPrinter(
-        TestReporter *reporter,
-        TextPrinter *newPrinter) {
-    TextMemo *memo = (TextMemo *)reporter->memo;
+        TestReporter* reporter,
+        TextPrinter* newPrinter) {
+    TextMemo* memo = (TextMemo*)reporter->memo;
     memo->printer = newPrinter;
 }
 

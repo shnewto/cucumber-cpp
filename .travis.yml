@@ -8,8 +8,8 @@ compiler:
   - clang
   - gcc
 env:
-  - GMOCK_VER=1.8.0 
-  - GMOCK_VER=1.7.0 
+  - GMOCK_VER=1.8.0
+  - GMOCK_VER=1.7.0
   - GMOCK_PATH=/usr/src/gmock #1.6.0 from ubuntu trusty repo
 matrix:
   exclude:
@@ -21,15 +21,18 @@ matrix:
 addons:
   apt:
     packages:
-      - libboost-thread-dev 
+      - libboost-thread-dev
       - libboost-system-dev
       - libboost-regex-dev
-      - libboost-date-time-dev 
+      - libboost-date-time-dev
       - libboost-program-options-dev
       - libboost-test-dev
       - google-mock
+install:
+  - git clone https://github.com/snewt/cucumber-cpp.git
+  - mkdir cgreen/build && pushdir cgreen/build && cmake .. && sudo make install && popd
 
-script: ./travis.sh 
+script: ./travis.sh
 
 notifications:
   email:

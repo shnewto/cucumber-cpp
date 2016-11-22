@@ -2,12 +2,12 @@
 
 Feature: fizz_buzz_reporter
   In order to practice for programming interviews
-  As someone who is bad at the fizz buzz exercise
-  I want to be told whether an unsigned integer corresponds to fizz, buzz, or fizzbuzz
+  As someone who is bad at the FIZZ, BUZZ exercise
+  I want to be told whether an unsigned integer corresponds to FIZZ, BUZZ, or FIZZBUZZ
 
-#  Scenario Outline: Report the fizzbuzz string associated with an integer
+#  Scenario Outline: Report the FIZZBUZZ string associated with an integer
   Scenario Outline: Add two numbers
-    Given I have passed <input> into fizz_buzz_reporter
+    Given I have passed <input> into fizzBuzzReporter
     Then the result should be <output>
 
   Examples:

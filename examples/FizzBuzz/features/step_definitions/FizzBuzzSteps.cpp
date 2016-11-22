@@ -1,4 +1,3 @@
-
 #include <cgreen/cgreen.h> // general unit testing
 #include <cgreen/mocks.h> // mocking functionality
 
@@ -10,7 +9,7 @@ using namespace cgreen;
 
 extern "C"
 {
-#include "fizz_buzz.h"
+#include "FizzBuzzReporter.h"
 };
 
 struct FizzBuzzState {
@@ -18,12 +17,12 @@ struct FizzBuzzState {
 };
 
 // mocked version of printf
-int printf(const char *__restrict __format, ...) {
+int printf(const char* __restrict __format, ...) {
     // do nothing
     return (int)mock();
 }
 
-GIVEN("^I have passed (.*) into fizz_buzz_reporter$") {
+GIVEN("^I have passed (.*) into fizzBuzzReporter") {
     REGEX_PARAM(unsigned int, input);
 
     ScenarioScope<FizzBuzzState> context;
@@ -31,7 +30,7 @@ GIVEN("^I have passed (.*) into fizz_buzz_reporter$") {
     // expect mocked function to be called
     expect(printf);
 
-    fizz_buzz_reporter(input, context->report_buffer);
+    fizzBuzzReporter(input, context->report_buffer);
 }
 
 THEN("^the result should be (.*)$") {

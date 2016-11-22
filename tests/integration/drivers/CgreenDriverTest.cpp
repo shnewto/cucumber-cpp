@@ -2,8 +2,8 @@
 #include <cucumber-cpp/autodetect.hpp>
 #include "../../utils/DriverTestRunner.hpp"
 
-using namespace cucumber;
 using namespace cgreen;
+using namespace cucumber;
 using namespace cucumber::internal;
 
 THEN(SUCCEED_MATCHER) {

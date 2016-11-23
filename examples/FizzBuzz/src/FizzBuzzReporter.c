@@ -19,5 +19,5 @@ void fizzBuzzReporter( unsigned int input, char* const reportBuffer )
         snprintf(reportBuffer, REPORT_STRING_LEN, "%u", input);
     }
 
-    printf("%s\n", reportBuffer);
+    printf("%u reports %s\n", input, reportBuffer ) ;
 }

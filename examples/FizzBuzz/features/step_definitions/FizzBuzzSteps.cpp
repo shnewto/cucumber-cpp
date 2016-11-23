@@ -17,7 +17,7 @@ struct FizzBuzzState {
 };
 
 // mocked version of printf
-int printf(const char* __restrict __format, ...) {
+int printf (const char *__restrict __format, ...) {
     // do nothing
     return (int)mock();
 }

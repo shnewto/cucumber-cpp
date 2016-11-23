@@ -10,8 +10,8 @@ else
     cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on -DGMOCK_SRC_DIR=${GMOCK_PATH} ..
 fi
 cmake --build build
-#cmake --build build --target test
-#cmake --build build --target features
+cmake --build build --target test
+cmake --build build --target features
 
 GTEST=build/examples/Calc/GTestCalculatorSteps
 BOOST=build/examples/Calc/BoostCalculatorSteps

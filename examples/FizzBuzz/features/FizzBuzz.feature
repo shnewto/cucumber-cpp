@@ -5,8 +5,7 @@ Feature: fizz_buzz_reporter
   As someone who is bad at the FIZZ, BUZZ exercise
   I want to be told whether an unsigned integer corresponds to FIZZ, BUZZ, or FIZZBUZZ
 
-#  Scenario Outline: Report the FIZZBUZZ string associated with an integer
-  Scenario Outline: Add two numbers
+  Scenario Outline: Report the FIZZBUZZ string associated with an integer
     Given I have passed <input> into fizzBuzzReporter
     Then the result should be <output>
 

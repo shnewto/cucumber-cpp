@@ -20,7 +20,8 @@ matrix:
 
 before_script:
   - git clone https://github.com/cgreen-devs/cgreen.git
-  - mkdir cgreen/build && pushd cgreen/build && cmake .. && make && sudo make install && popd && sudo ldconfig
+  - mkdir cgreen/build && pushd cgreen/build && cmake .. && make && sudo make install && popd
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo ldconfig; fi
 
 addons:
   apt:

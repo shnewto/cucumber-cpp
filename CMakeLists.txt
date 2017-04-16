@@ -95,6 +95,14 @@ if(NOT CUKE_DISABLE_GTEST)
 endif()
 
 #
+# cgreen
+#
+
+if(NOT CUKE_DISABLE_CGREEN)
+    find_package(cgreen)
+endif()
+
+#
 # Valgrind
 #
 
@@ -138,13 +146,6 @@ if(VALGRIND_TESTS)
 
         _add_test(${TEST_ARGS})
     endfunction()
-endif()
-
-#
-# cgreen
-#
-if(NOT CUKE_DISABLE_CGREEN)
-    find_package(cgreen)
 endif()
 
 #

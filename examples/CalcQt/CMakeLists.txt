@@ -15,7 +15,7 @@ if(${Qt5Core_FOUND} AND ${Qt5Widgets_FOUND} AND ${Qt5Test_FOUND})
 
     add_library(libcalcqt src/CalculatorWidget.cpp ${CALCQT_HEADERS})
     target_link_libraries(libcalcqt ${QT_LIBRARIES})
-    
+
     add_executable(calcqt ${CALCQT_SOURCES})
     target_link_libraries(calcqt libcalcqt ${QT_LIBRARIES})
 else()
@@ -24,7 +24,7 @@ else()
         include(${QT_USE_FILE})
         qt4_wrap_cpp(CALCQT_HEADERS_MOC ${CALCQT_HEADERS})
         add_library(libcalcqt src/CalculatorWidget ${CALCQT_HEADERS_MOC})
-    
+
         add_executable(calcqt ${CALCQT_SOURCES} ${CALCQT_HEADERS_MOC})
         target_link_libraries(calcqt ${QT_LIBRARIES})
     endif()
@@ -39,5 +39,10 @@ if(QT_LIBRARIES)
     if(GTEST_FOUND)
         add_executable(GTestCalculatorQtSteps features/step_definitions/GTestCalculatorQtSteps)
         target_link_libraries(GTestCalculatorQtSteps libcalcqt ${CUKE_LIBRARIES} ${CUKE_GTEST_LIBRARIES} ${QT_LIBRARIES})
+    endif()
+    if(cgreen_FOUND)
+        include_directories(${CGREEN_INCLUDE_DIRS})
+        add_executable(CgreenCalculatorQtSteps features/step_definitions/CgreenCalculatorQtSteps)
+        target_link_libraries(CgreenCalculatorQtSteps libcalcqt ${CUKE_LIBRARIES} ${CGREEN_LIBRARIES} ${QT_LIBRARIES})
     endif()
 endif()

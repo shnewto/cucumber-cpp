@@ -22,7 +22,9 @@ cmake -E chdir build cmake \
     ${VALGRIND_TESTS:+"-DVALGRIND_TESTS=${VALGRIND_TESTS}"} \
     ${GMOCK_PATH:-"-DGMOCK_VER=${GMOCK_VER}"} \
     ${GMOCK_PATH:+"-DGMOCK_SRC_DIR=${GMOCK_PATH}"} \
+    -DCMAKE_PREFIX_PATH=${HOME}/usr \
     ..
+
 cmake --build build
 cmake --build build --target test
 cmake --build build --target features
@@ -93,4 +95,5 @@ CGREEN=build/examples/FizzBuzz/FizzBuzzSteps
 if [ -f $CGREEN ]; then
     $CGREEN >/dev/null &
     cucumber examples/FizzBuzz
+    wait
 fi

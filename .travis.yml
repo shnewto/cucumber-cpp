@@ -24,7 +24,6 @@ matrix:
 
 before_script:
   - git clone https://github.com/cgreen-devs/cgreen.git
-  - git clone https://github.com/cgreen-devs/cgreen.git
   - git -C cgreen checkout 7030597
   - cmake -E make_directory cgreen/build
   - cmake -E chdir cgreen/build cmake -G Ninja -DCMAKE_INSTALL_PREFIX=${HOME}/usr ..

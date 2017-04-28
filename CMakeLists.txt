@@ -7,6 +7,7 @@ set(CUKE_USE_STATIC_GTEST ON CACHE BOOL "Statically link Google Test")
 
 set(CUKE_DISABLE_BOOST_TEST OFF CACHE BOOL "Disable boost:test")
 set(CUKE_DISABLE_GTEST OFF CACHE BOOL "Disable Google Test framework")
+set(CUKE_DISABLE_CGREEN OFF CACHE BOOL "Disable Cgreen Test framework")
 set(CUKE_DISABLE_UNIT_TESTS OFF CACHE BOOL "Disable unit tests")
 set(CUKE_DISABLE_E2E_TESTS OFF CACHE BOOL "Disable end-to-end tests")
 set(CUKE_ENABLE_EXAMPLES OFF CACHE BOOL "Enable the examples")

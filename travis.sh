@@ -35,4 +35,5 @@ fi
 if [ -f $CGREEN ]; then
     $CGREEN >/dev/null &
     cucumber examples/FizzBuzz
+    wait
 fi

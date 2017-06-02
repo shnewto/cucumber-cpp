@@ -51,6 +51,5 @@ if(CGREEN_FOUND)
   set_target_properties(Cgreen::runner PROPERTIES
       IMPORTED_LOCATION "${CGREEN_RUNNER}"
   )
-  include_directories(${CGREEN_INCLUDE_DIR})
 endif()
 

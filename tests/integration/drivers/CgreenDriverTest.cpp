@@ -45,7 +45,6 @@ public:
     }
 private:
     void stepInvocationInitsCgreenTest() {
-        std::cout << "= Init =\n";
         CgreenStepDouble framework;
         expectFalse(
                 "Framework is not initialized before the first test",
@@ -57,7 +56,7 @@ private:
     }
 };
 
-int main(int argc, char** argv) {
+int main() {
     CgreenDriverTest test;
     return test.run();
 }

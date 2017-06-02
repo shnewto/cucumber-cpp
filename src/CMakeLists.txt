@@ -27,6 +27,7 @@ if(Boost_UNIT_TEST_FRAMEWORK_FOUND)
 endif()
 
 if(CGREEN_FOUND)
+    list(APPEND CUKE_DEP_LIBRARIES Cgreen::Cgreen)
     list(APPEND CUKE_SOURCES drivers/CgreenDriver.cpp)
 endif()
 

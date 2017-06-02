@@ -41,7 +41,7 @@ static CukeCgreenInterceptor cgreenInterceptor;
 std::string CukeCgreenInterceptor::cgreenOutput;
 TestSuite * CukeCgreenInterceptor::cgreenSuite = NULL;
 TestReporter * CukeCgreenInterceptor::cgreenReporter = NULL;
-boost::function< void() > CukeCgreenInterceptor::currentTestBody = NULL;
+boost::function< void() > CukeCgreenInterceptor::currentTestBody;
 
 Ensure(currentTest) {
     if(cgreenInterceptor.currentTestBody)
@@ -78,12 +78,13 @@ int CukeCgreenInterceptor::cgreenPrinter(const char* format, ...) {
     va_list argPtr;
     va_start(argPtr, format);
     vsnprintf(buffer, sizeof(buffer), format, argPtr);
+    va_end(argPtr);
+
     if(!is_blacklisted(buffer)) {
         cgreenOutput += "\n\n";
         cgreenOutput += buffer;
         cgreenOutput += "\n\n";
     }
-    va_end(argPtr);
 
     static const char blackBoxInfo[] = "\"initCgreenTest\"";
     std::size_t position = cgreenOutput.find(blackBoxInfo);

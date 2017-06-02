@@ -42,6 +42,11 @@ endif()
 add_library(cucumber-cpp-nomain STATIC ${CUKE_SOURCES})
 add_library(cucumber-cpp STATIC ${CUKE_SOURCES} main.cpp)
 
+if(CGREEN_FOUND)
+    target_include_directories(cucumber-cpp-nomain PRIVATE ${CGREEN_INCLUDE_DIR})
+    target_include_directories(cucumber-cpp PRIVATE ${CGREEN_INCLUDE_DIR})
+endif()
+
 if(MINGW)
     list(APPEND CUKE_DEP_LIBRARIES ws2_32)
 endif(MINGW)

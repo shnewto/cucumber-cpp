@@ -31,7 +31,6 @@ before_script:
   - cmake -E chdir cgreen/build cmake -G Ninja -DCMAKE_INSTALL_PREFIX:PATH=${HOME}/usr ..
   - cmake --build cgreen/build
   - cmake --build cgreen/build --target install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo ldconfig; fi
 
 addons:
   apt:

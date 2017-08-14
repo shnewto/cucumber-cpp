@@ -45,7 +45,6 @@ public:
     }
 private:
     void stepInvocationInitsCgreenTest() {
-        std::cout << "= Init =\n";
         CgreenStepDouble framework;
         expectFalse(
                 "Framework is not initialized before the first test",

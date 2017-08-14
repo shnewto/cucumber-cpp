@@ -21,44 +21,47 @@ static const char* const blacklist[] = {
 };
 
 class CukeCgreenInterceptor {
-public:
-    const std::string getCgreenOutput();
-    static void clearCgreenOutput();
-    static void reset_reporter();
-    static int cgreenPrinter(const char* format, ...);
-    static TestSuite *cgreenSuite;
-    static TestReporter *cgreenReporter;
-    static boost::function< void() > currentTestBody;
-    ~CukeCgreenInterceptor();
-
 private:
-    static std::string cgreenOutput;
-    static bool is_blacklisted(const char* input);
+    std::string cgreenOutput;
+    bool is_blacklisted(const char* input);   
+    CukeCgreenInterceptor();
+    ~CukeCgreenInterceptor();
+public:
+    static CukeCgreenInterceptor & Instance();
+    const std::string & getCgreenOutput();
+    void clearCgreenOutput();
+    void reset_reporter();
+    static int cgreenPrinter(const char* format, ...);
+    TestSuite *cgreenSuite;
+    TestReporter *cgreenReporter;
+    boost::function< void() > currentTestBody;
 };
 
-static CukeCgreenInterceptor cgreenInterceptor;
-
-std::string CukeCgreenInterceptor::cgreenOutput;
-TestSuite * CukeCgreenInterceptor::cgreenSuite = NULL;
-TestReporter * CukeCgreenInterceptor::cgreenReporter = NULL;
-boost::function< void() > CukeCgreenInterceptor::currentTestBody;
-
 Ensure(currentTest) {
-    if(cgreenInterceptor.currentTestBody)
+    if(CukeCgreenInterceptor::Instance().currentTestBody)
     {
-        cgreenInterceptor.currentTestBody();
+        CukeCgreenInterceptor::Instance().currentTestBody();
     }
 }
 
-CukeCgreenInterceptor::~CukeCgreenInterceptor() {
-    destroy_test_suite(cgreenSuite);
-    destroy_reporter(cgreenReporter);
+CukeCgreenInterceptor::CukeCgreenInterceptor() {
+    cgreenSuite = NULL;
+    cgreenReporter = NULL;
 }
 
-const std::string CukeCgreenInterceptor::getCgreenOutput() {
+CukeCgreenInterceptor::~CukeCgreenInterceptor() {
+    if(cgreenSuite) { destroy_test_suite(cgreenSuite); }
+    if(cgreenReporter) { destroy_reporter(cgreenReporter); }
+}
+
+CukeCgreenInterceptor & CukeCgreenInterceptor::Instance() {
+    static CukeCgreenInterceptor cgreenInterceptor;
+    return cgreenInterceptor;
+}
+
+const std::string & CukeCgreenInterceptor::getCgreenOutput() {
     return cgreenOutput;
 }
-
 
 void CukeCgreenInterceptor::clearCgreenOutput() {
     cgreenOutput.clear();
@@ -74,25 +77,26 @@ void CukeCgreenInterceptor::reset_reporter() {
 
 int CukeCgreenInterceptor::cgreenPrinter(const char* format, ...) {
     char buffer[10000];
-
     va_list argPtr;
     va_start(argPtr, format);
-    vsnprintf(buffer, sizeof(buffer), format, argPtr);
+    if(vsnprintf(buffer, sizeof(buffer), format, argPtr) < 0) {
+        return 0;
+    }
     va_end(argPtr);
 
-    if(!is_blacklisted(buffer)) {
-        cgreenOutput += "\n\n";
-        cgreenOutput += buffer;
-        cgreenOutput += "\n\n";
+    if(!CukeCgreenInterceptor::Instance().is_blacklisted(buffer)) {
+        CukeCgreenInterceptor::Instance().cgreenOutput += "\n\n";
+        CukeCgreenInterceptor::Instance().cgreenOutput += buffer;
+        CukeCgreenInterceptor::Instance().cgreenOutput += "\n\n";
     }
 
     static const char blackBoxInfo[] = "\"initCgreenTest\"";
-    std::size_t position = cgreenOutput.find(blackBoxInfo);
+    std::size_t position = CukeCgreenInterceptor::Instance().cgreenOutput.find(blackBoxInfo);
     if(position != std::string::npos) {
-        cgreenOutput.erase(position);
+        CukeCgreenInterceptor::Instance().cgreenOutput.erase(position);
     }
 
-    return cgreenOutput.length();
+    return CukeCgreenInterceptor::Instance().cgreenOutput.length();
 }
 
 bool CukeCgreenInterceptor::is_blacklisted(const char* input) {
@@ -124,33 +128,33 @@ const InvokeResult CgreenStep::invokeStepBody() {
     if(!initialized) {
         initCgreenTest();
     } else {
-        cgreenInterceptor.reset_reporter();
+        CukeCgreenInterceptor::Instance().reset_reporter();
     }
 
-    cgreenInterceptor.currentTestBody = boost::bind(&CgreenStep::body, this);
+    CukeCgreenInterceptor::Instance().currentTestBody = boost::bind(&CgreenStep::body, this);
 
     int suite_result = run_single_test(
-            cgreenInterceptor.cgreenSuite,
+            CukeCgreenInterceptor::Instance().cgreenSuite,
             "currentTest",
-            cgreenInterceptor.cgreenReporter);
+            CukeCgreenInterceptor::Instance().cgreenReporter);
 
     if (suite_result == EXIT_SUCCESS) {
         return InvokeResult::success();
     } else {
-        return InvokeResult::failure(cgreenInterceptor.getCgreenOutput());
+        return InvokeResult::failure(CukeCgreenInterceptor::Instance().getCgreenOutput());
     }
 }
 
 void CgreenStep::initCgreenTest() {
-    cgreenInterceptor.cgreenSuite = create_test_suite();
-    cgreenInterceptor.cgreenReporter = create_text_reporter();
-    cgreenInterceptor.clearCgreenOutput();
+    CukeCgreenInterceptor::Instance().cgreenSuite = create_test_suite();
+    CukeCgreenInterceptor::Instance().cgreenReporter = create_text_reporter();
+    CukeCgreenInterceptor::Instance().clearCgreenOutput();
 
     setReporterPrinter(
-            cgreenInterceptor.cgreenReporter,
-            cgreenInterceptor.cgreenPrinter);
+            CukeCgreenInterceptor::Instance().cgreenReporter,
+            CukeCgreenInterceptor::Instance().cgreenPrinter);
 
-    add_test(cgreenInterceptor.cgreenSuite, currentTest);
+    add_test(CukeCgreenInterceptor::Instance().cgreenSuite, currentTest);
 
     initialized = true;
 }

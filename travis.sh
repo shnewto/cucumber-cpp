@@ -53,6 +53,7 @@ fi
 for TEST in \
     build/examples/Calc/GTestCalculatorSteps \
     build/examples/Calc/BoostCalculatorSteps \
+    build/examples/Calc/CgreenCalculatorSteps \
     build/examples/Calc/FuncArgsCalculatorSteps \
 ; do
     if [ -f "${TEST}" ]; then
@@ -66,11 +67,23 @@ done
 for TEST in \
     build/examples/CalcQt/GTestCalculatorQtSteps \
     build/examples/CalcQt/BoostCalculatorQtSteps \
+    build/examples/Calc/CgreenCalculatorQtSteps \
 ; do
     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
         "${TEST}" 2> /dev/null &
         sleep 1
         cucumber examples/CalcQt
+        wait %
+    fi
+done
+
+for TEST in \
+    build/examples/FizzBuzz/FizzBuzzSteps \
+; do
+    if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
+        "${TEST}" 2> /dev/null &
+        sleep 1
+        cucumber examples/FizzBuzz
         wait %
     fi
 done
@@ -88,12 +101,5 @@ fi
 if [ -n "${XVFBPID:-}" ]; then
     # Stop virtual X display server
     kill $XVFBPID
-    wait
-fi
-
-CGREEN=build/examples/FizzBuzz/FizzBuzzSteps
-if [ -f $CGREEN ]; then
-    $CGREEN >/dev/null &
-    cucumber examples/FizzBuzz
     wait
 fi

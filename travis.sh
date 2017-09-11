@@ -70,7 +70,7 @@ for TEST in \
     build/examples/CalcQt/CgreenCalculatorQtSteps \
 ; do
     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
-        "${TEST}" 2> /dev/null &
+        CALCQT_STEP_DELAY=100 "${TEST}" 2> /dev/null &
         sleep 1
         cucumber examples/CalcQt
         wait %
@@ -80,8 +80,8 @@ done
 for TEST in \
     build/examples/FizzBuzz/FizzBuzzSteps \
 ; do
-    if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
-        "${TEST}" 2> /dev/null &
+    if [ -f "${TEST}" ]; then
+        "${TEST}" > /dev/null &
         sleep 1
         cucumber examples/FizzBuzz
         wait %

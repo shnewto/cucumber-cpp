@@ -67,7 +67,7 @@ done
 for TEST in \
     build/examples/CalcQt/GTestCalculatorQtSteps \
     build/examples/CalcQt/BoostCalculatorQtSteps \
-    build/examples/Calc/CgreenCalculatorQtSteps \
+    build/examples/CalcQt/CgreenCalculatorQtSteps \
 ; do
     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
         "${TEST}" 2> /dev/null &

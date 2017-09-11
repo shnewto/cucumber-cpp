@@ -56,7 +56,7 @@ private:
     }
 };
 
-int main(int argc, char** argv) {
+int main() {
     CgreenDriverTest test;
     return test.run();
 }

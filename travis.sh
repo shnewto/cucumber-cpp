@@ -70,10 +70,13 @@ for TEST in \
     build/examples/CalcQt/CgreenCalculatorQtSteps \
 ; do
     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
-        CALCQT_STEP_DELAY=100 "${TEST}" 2> /dev/null &
+        "${TEST}" 2> err.out &
         sleep 1
         cucumber examples/CalcQt
         wait %
+        echo "______________________"
+        cat err.out
+        echo "______________________"
     fi
 done
 

@@ -60,7 +60,7 @@ if(MSVC11)
     message(STATUS "Forcing Boost 1.51+ on MSVC11")
     set(BOOST_MIN_VERSION "1.51")
 else()
-    set(BOOST_MIN_VERSION "1.46")
+    set(BOOST_MIN_VERSION "1.58")
 endif()
 
 set(Boost_USE_STATIC_RUNTIME OFF)

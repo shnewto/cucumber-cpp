@@ -47,7 +47,6 @@ addons:
       - valgrind
       - qtbase5-dev
       - xvfb
-      - libgl1-mesa-dri
 
 install:
   - if [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then brew update && brew install ninja qt5; fi

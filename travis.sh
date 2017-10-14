@@ -86,25 +86,25 @@ for TEST in \
     fi
 done
 
-# for TEST in \
-#     build/examples/FizzBuzz/FizzBuzzSteps \
-# ; do
-#     if [ -f "${TEST}" ]; then
-#         "${TEST}" > /dev/null &
-#         sleep 1
-#         cucumber examples/FizzBuzz
-#         wait %
-#     fi
-# done
+for TEST in \
+    build/examples/FizzBuzz/FizzBuzzSteps \
+; do
+    if [ -f "${TEST}" ]; then
+        "${TEST}" > /dev/null &
+        sleep 1
+        cucumber examples/FizzBuzz
+        wait %
+    fi
+done
 
-# Test unix sockets
-SOCK=cucumber.wire.sock
-TEST=build/examples/FeatureShowcase/FeatureShowcaseSteps
-if [ -f "${TEST}" ]; then
-    echo "unix: ${SOCK}" > examples/FeatureShowcase/features/step_definitions/cucumber.wire
-    "${TEST}" --unix "${SOCK}" > /dev/null &
-    cucumber examples/FeatureShowcase
-    wait %
-fi
+# # Test unix sockets
+# SOCK=cucumber.wire.sock
+# TEST=build/examples/FeatureShowcase/FeatureShowcaseSteps
+# if [ -f "${TEST}" ]; then
+#     echo "unix: ${SOCK}" > examples/FeatureShowcase/features/step_definitions/cucumber.wire
+#     "${TEST}" --unix "${SOCK}" > /dev/null &
+#     cucumber examples/FeatureShowcase
+#     wait %
+# fi
 
 killXvfb

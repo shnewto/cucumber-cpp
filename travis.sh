@@ -86,13 +86,16 @@ for TEST in \
     fi
 done
 
-TEST=build/examples/FizzBuzz/FizzBuzzSteps
-if [ -f "${TEST}" ]; then
-    "${TEST}" > /dev/null &
-    sleep 1
-    cucumber examples/FizzBuzz
-    wait %
-fi
+# for TEST in \
+#     build/examples/FizzBuzz/FizzBuzzSteps \
+# ; do
+#     if [ -f "${TEST}" ]; then
+#         "${TEST}" > /dev/null &
+#         sleep 1
+#         cucumber examples/FizzBuzz
+#         wait %
+#     fi
+# done
 
 # Test unix sockets
 SOCK=cucumber.wire.sock

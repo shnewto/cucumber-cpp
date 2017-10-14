@@ -73,18 +73,18 @@ for TEST in \
     fi
 done
 
-# for TEST in \
-#     build/examples/CalcQt/GTestCalculatorQtSteps \
-#     build/examples/CalcQt/BoostCalculatorQtSteps \
-#     build/examples/CalcQt/CgreenCalculatorQtSteps \
-# ; do
-#     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
-#         "${TEST}" 2> /dev/null &
-#         sleep 1
-#         cucumber examples/CalcQt
-#         wait %
-#     fi
-# done
+for TEST in \
+    build/examples/CalcQt/GTestCalculatorQtSteps \
+    build/examples/CalcQt/BoostCalculatorQtSteps \
+    build/examples/CalcQt/CgreenCalculatorQtSteps \
+; do
+    if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
+        "${TEST}" 2> /dev/null &
+        sleep 1
+        cucumber examples/CalcQt
+        wait %
+    fi
+done
 
 for TEST in \
     build/examples/FizzBuzz/FizzBuzzSteps \

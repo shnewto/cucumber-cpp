@@ -73,18 +73,18 @@ for TEST in \
     fi
 done
 
-for TEST in \
-    build/examples/CalcQt/GTestCalculatorQtSteps \
-    build/examples/CalcQt/BoostCalculatorQtSteps \
-    build/examples/CalcQt/CgreenCalculatorQtSteps \
-; do
-    if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
-        "${TEST}" 2> /dev/null &
-        sleep 1
-        cucumber examples/CalcQt
-        wait %
-    fi
-done
+# for TEST in \
+#     build/examples/CalcQt/GTestCalculatorQtSteps \
+#     build/examples/CalcQt/BoostCalculatorQtSteps \
+#     build/examples/CalcQt/CgreenCalculatorQtSteps \
+# ; do
+#     if [ -f "${TEST}" -a -n "${DISPLAY:-}" ]; then
+#         "${TEST}" 2> /dev/null &
+#         sleep 1
+#         cucumber examples/CalcQt
+#         wait %
+#     fi
+# done
 
 for TEST in \
     build/examples/FizzBuzz/FizzBuzzSteps \
@@ -97,14 +97,14 @@ for TEST in \
     fi
 done
 
-# # Test unix sockets
-# SOCK=cucumber.wire.sock
-# TEST=build/examples/FeatureShowcase/FeatureShowcaseSteps
-# if [ -f "${TEST}" ]; then
-#     echo "unix: ${SOCK}" > examples/FeatureShowcase/features/step_definitions/cucumber.wire
-#     "${TEST}" --unix "${SOCK}" > /dev/null &
-#     cucumber examples/FeatureShowcase
-#     wait %
-# fi
+# Test unix sockets
+SOCK=cucumber.wire.sock
+TEST=build/examples/FeatureShowcase/FeatureShowcaseSteps
+if [ -f "${TEST}" ]; then
+    echo "unix: ${SOCK}" > examples/FeatureShowcase/features/step_definitions/cucumber.wire
+    "${TEST}" --unix "${SOCK}" > /dev/null &
+    cucumber examples/FeatureShowcase
+    wait %
+fi
 
 killXvfb

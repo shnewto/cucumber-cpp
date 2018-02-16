@@ -122,4 +122,4 @@ if [ -f "${TEST}" ]; then
     wait %
 fi
 
--killXvfb
+killXvfb

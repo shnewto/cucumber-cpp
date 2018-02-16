@@ -25,3 +25,8 @@ if(CGREEN_FOUND)
     add_executable(CgreenCalculatorSteps features/step_definitions/CgreenCalculatorSteps)
     target_link_libraries(CgreenCalculatorSteps Calc ${CUKE_LIBRARIES} Cgreen::Cgreen)
 endif()
+
+if(Qt5TEST_FOUND)
+    add_executable(QtTestCalculatorSteps features/step_definitions/QtTestCalculatorSteps)
+    target_link_libraries(QtTestCalculatorSteps Calc Qt5::Test ${CUKE_LIBRARIES})
+endif()

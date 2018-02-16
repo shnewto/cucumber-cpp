@@ -52,4 +52,8 @@ if(CGREEN_FOUND)
     cuke_add_driver_test(integration/drivers/CgreenDriverTest Cgreen::Cgreen)
 endif()
 
+if(Qt5TEST_FOUND)
+    cuke_add_driver_test(integration/drivers/QtTestDriverTest ${QT_LIBRARIES})
+endif()
+
 cuke_add_driver_test(integration/drivers/GenericDriverTest)

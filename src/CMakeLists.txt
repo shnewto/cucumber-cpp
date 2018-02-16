@@ -31,6 +31,13 @@ if(CGREEN_FOUND)
     list(APPEND CUKE_SOURCES drivers/CgreenDriver.cpp)
 endif()
 
+if(Qt5TEST_FOUND)
+    qt5_wrap_cpp(MOC_FILE ../include/cucumber-cpp/internal/drivers/QtTestDriver.hpp)
+    list(APPEND CUKE_SOURCES ${MOC_FILE})
+    list(APPEND CUKE_SOURCES drivers/QtTestDriver.cpp)
+    list(APPEND CUKE_DEP_LIBRARIES Qt5::Test)
+endif()
+
 if(CMAKE_EXTRA_GENERATOR OR MSVC_IDE)
     message(STATUS "Adding header files to project")
     file(GLOB_RECURSE CUKE_HEADERS "${CUKE_INCLUDE_DIR}/cucumber-cpp/*.hpp")
